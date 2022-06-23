@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-chutiyagiri-staging-122153-authRole",
+      "UnauthRoleArn": "arn:aws:iam::062695736095:role/amplify-chutiyagiri-staging-122153-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::062695736095:role/amplify-chutiyagiri-staging-122153-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-chutiyagiri-staging-122153-deployment",
+      "UnauthRoleName": "amplify-chutiyagiri-staging-122153-unauthRole",
+      "StackName": "amplify-chutiyagiri-staging-122153",
+      "StackId": "arn:aws:cloudformation:ap-south-1:062695736095:stack/amplify-chutiyagiri-staging-122153/11360060-f2ef-11ec-b9d2-06d8c3b1567a",
+      "AmplifyAppId": "d3pmznmy69c14l"
+    },
+    "categories": {
+      "auth": {
+        "Chutiyagiri": {}
+      }
+    }
+  }
+}
