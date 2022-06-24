@@ -1,21 +1,35 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
-import {useNavigation} from '@react-navigation/core';
-import {useForm} from 'react-hook-form';
+import { useNavigation } from '@react-navigation/core';
+import { useForm } from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const SignUpScreen = () => {
-  const {control, handleSubmit, watch} = useForm();
+  const { control, handleSubmit, watch } = useForm();
   const pwd = watch('password');
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
-    navigation.navigate('ConfirmEmail');
+  const onRegisterPressed = async data => {
+    const { username, password, email, name } = data;
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: { email, name },
+      });
+      navigation.navigate('ConfirmEmail',{username});
+      // console.log(response);
+    } catch (e) {
+      Alert.alert('Oops', e.message);
+    }
+    // navigation.navigate('ConfirmEmail');
+
   };
 
   const onSignInPress = () => {
@@ -57,7 +71,7 @@ const SignUpScreen = () => {
           placeholder="Email"
           rules={{
             required: 'Email is required',
-            pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+            pattern: { value: EMAIL_REGEX, message: 'Email is invalid' },
           }}
         />
         <CustomInput
